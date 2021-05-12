@@ -47,7 +47,7 @@ jobs:
           cargo install cross
 
       - name: build wry
-        run: $CMD cargo build --target ${{ matrix.platform.target }}
+        run: $CMD build --target ${{ matrix.platform.target }}
 
       - name: build tests and examples
         shell: bash
