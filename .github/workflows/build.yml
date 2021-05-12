@@ -9,11 +9,11 @@ jobs:
       matrix:
         rust_version: [stable]
         platform:
-          - { target: x86_64-pc-windows-msvc, os: windows-latest }
-          - { target: x86_64-unknown-linux-gnu, os: ubuntu-latest }
+          - { target: x86_64-pc-windows-msvc, os: windows-latest, cmd: cargo }
+          - { target: x86_64-unknown-linux-gnu, os: ubuntu-latest, cmd: cargo }
           - { target: arm-unknown-linux-gnueabihf, os: ubuntu-latest, cmd: cross }
           - { target: armv7-unknown-linux-gnueabihf, os: ubuntu-latest, cmd: cross }
-          - { target: x86_64-apple-darwin, os: macos-latest }
+          - { target: x86_64-apple-darwin, os: macos-latest, cmd: cargo }
 
     env:
       CMD: ${{ matrix.platform.cmd }}
@@ -51,8 +51,8 @@ jobs:
 
       - name: build tests and examples
         shell: bash
-        run: $CMD cargo test --no-run --verbose --target ${{ matrix.platform.target }}
+        run: $CMD test --no-run --verbose --target ${{ matrix.platform.target }}
 
       - name: run tests
         if: (!contains(matrix.platform.target, 'arm'))
-        run: cargo test --verbose --target ${{ matrix.platform.target }}
+        run: $CMD test --verbose --target ${{ matrix.platform.target }}
