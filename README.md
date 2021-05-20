@@ -4,6 +4,7 @@
 
 Cross-platform WebView rendering library in Rust that supports all major desktop platforms like Windows, macOS, and Linux.
 
+
 ```toml
 [dependencies]
 wry = "0.9"
